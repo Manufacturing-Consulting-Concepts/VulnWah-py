@@ -1,5 +1,5 @@
 boto3
-botocore
+botocore >=1.26.10
 certifi
 charset-normalizer
 idna
