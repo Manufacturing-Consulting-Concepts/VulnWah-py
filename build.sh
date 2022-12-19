@@ -43,6 +43,6 @@ cp requirements.txt /var/ossec/wodles/custom
 python3 -m venv /var/ossec/wodles/custom/venv
 source /var/ossec/wodles/custom/venv/bin/activate
 /var/ossec/wodles/custom/venv/bin/pip3 install --upgrade pip
-/var/ossec/wodles/custom/venv/bin/pip3 install -r /opt/oktwah/app/requirements.txt
+/var/ossec/wodles/custom/venv/bin/pip3 install -r /var/ossec/wodles/custom/requirements.txt
 
 sha256sum /var/ossec/wodles/custom/vuln.py
