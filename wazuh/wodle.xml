@@ -1,0 +1,11 @@
+<wodle name="vuln_report">
+  <disabled>no</disabled>
+  <tag>vulnerabilities</tag>
+  <command>/var/ossec/wodles/custom/venv/bin/python3 /var/ossec/wodles/custom/vuln.py</command>
+  <interval>14d</interval>
+  <wday>tuesday</wday>
+  <ignore_output>no</ignore_output>
+  <run_on_start>yes</run_on_start>
+  <timeout>0</timeout>
+  <verify_sha256>somestring</verify_sha256>
+</wodle>
