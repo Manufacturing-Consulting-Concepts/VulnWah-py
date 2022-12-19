@@ -69,7 +69,7 @@ def main():
         for ids in agents:
             if get_vuln_reports(ids)["detail"] == "404: Not Found":
                 print(f"No vulnerabilities for agent {ids}")
-                sys.exit(1)
+                pass
             else:
                 vulns.append(get_vuln_reports(ids))
     except Exception as e:
@@ -79,8 +79,12 @@ def main():
 
 
 if __name__ == "__main__":
-    report = io.BytesIO(bytes(json.dumps(main()), encoding="utf-8"))
+    if not main():
+        print("No vulnerabilities found...")
+        pass
+    else:
+        report = io.BytesIO(bytes(json.dumps(main()), encoding="utf-8"))
 
-    s3 = boto3.resource('s3')
-    s3.meta.client.upload_fileobj(report, os.getenv("export EXAMPLE_VARIABLE='example value'"),
-                                  f"{datetime.now()}-vulnerability-report")
+        s3 = boto3.resource('s3')
+        s3.meta.client.upload_fileobj(report, os.getenv("export EXAMPLE_VARIABLE='example value'"),
+                                      f"{datetime.now()}-vulnerability-report")
