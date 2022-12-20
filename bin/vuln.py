@@ -1,7 +1,6 @@
 import io
 import json
 import os
-import sys
 from datetime import datetime
 
 import boto3
@@ -55,8 +54,7 @@ def get_vuln_reports(agent_id: int):
         "Authorization": "Bearer {}".format(get_jwt_token())
     }
 
-    response = requests.get(f"{wazuh_base_url}/vulnerabilities/{agent_id}", headers=headers, verify=False)
-
+    response = requests.get(f"{wazuh_base_url}/vulnerability/{agent_id}", headers=headers, verify=False)
     return response.json()
 
 
@@ -67,7 +65,7 @@ def main():
     vulns = []
     try:
         for ids in agents:
-            if get_vuln_reports(ids)["detail"] == "404: Not Found":
+            if get_vuln_reports(ids)["data"]["total_affected_items"] == 0:
                 print(f"No vulnerabilities for agent {ids}")
                 pass
             else:
