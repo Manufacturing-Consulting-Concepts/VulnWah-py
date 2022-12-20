@@ -62,7 +62,7 @@ agents = [x["id"] for x in wazuh_api()["data"]["affected_items"]]
 
 
 def main():
-    vulns = ["test"]
+    vulns = []
     try:
         for ids in agents:
             if get_vuln_reports(ids)["data"]["total_affected_items"] == 0:
