@@ -5,10 +5,10 @@
 1. Configure Environmental Variables
    To ensure that variables persist through reboots and across all users, configure and custom shell script in
    /etc/profile.d/[custom.sh].
-   Add in the following variables:
+   Add in the following variables (add in bucket name value):
 
 ```shell
-export export EXAMPLE_VARIABLE='s3_bucket_name'
+export S3_BUCKET_NAME='s3_bucket_name'
 ```
 
 2. Install the AWS CLI
