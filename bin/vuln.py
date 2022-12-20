@@ -69,8 +69,8 @@ def main():
                 print(f"No vulnerabilities for agent {ids}")
                 pass
             else:
-                block = "{ " + "'" + f"{ids}" + "'" + ":" + f"{get_vuln_reports(ids)}" + " }"
-                vulns.append(json.dumps(block))
+                ids["agent"] = ids
+                vulns.append(ids)
     except Exception as e:
         print(e)
 
