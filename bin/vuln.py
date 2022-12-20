@@ -69,7 +69,8 @@ def main():
                 print(f"No vulnerabilities for agent {ids}")
                 pass
             else:
-                vulns.append("{ agent_id:" + f"{ids}" + get_vuln_reports(ids) + "}")
+                block = "{ " + f"{ids}" + ":" + f"{get_vuln_reports(ids)}" + "}"
+                vulns.append(block)
     except Exception as e:
         print(e)
 
