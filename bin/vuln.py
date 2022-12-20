@@ -69,8 +69,12 @@ def main():
                 print(f"No vulnerabilities for agent {ids}")
                 pass
             else:
-                ids["agent"] = ids
-                vulns.append(ids)
+                # add agent id to each vulnerability
+                # Add a field to each vulnerability that contains the agent id
+                vuln = get_vuln_reports(ids)["data"]["affected_items"]
+                for v in vuln:
+                    v["agent_id"] = ids
+                    vulns.append(v)
     except Exception as e:
         print(e)
 
