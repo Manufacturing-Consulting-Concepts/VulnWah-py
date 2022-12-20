@@ -69,7 +69,7 @@ def main():
                 print(f"No vulnerabilities for agent {ids}")
                 pass
             else:
-                vulns.append(get_vuln_reports(ids))
+                vulns.append("{ agent_id:" + f"{ids}" + get_vuln_reports(ids) + "}")
     except Exception as e:
         print(e)
 
@@ -85,6 +85,6 @@ if __name__ == "__main__":
 
         s3 = boto3.resource('s3')
         s3.meta.client.put_object(Body=report.getvalue(), Bucket=os.getenv("S3_BUCKET_NAME"),
-                                  Key=f"{datetime.now()}-vulnerability-report")
+                                  Key=f"{datetime.now()}-vulnerability-report.json")
 
 
