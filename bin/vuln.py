@@ -62,7 +62,7 @@ agents = [x["id"] for x in wazuh_api()["data"]["affected_items"]]
 
 
 def main():
-    vulns = []
+    vulns = ["test"]
     try:
         for ids in agents:
             if get_vuln_reports(ids)["data"]["total_affected_items"] == 0:
@@ -79,10 +79,12 @@ def main():
 if __name__ == "__main__":
     if not main():
         print("No vulnerabilities found...")
-        pass
+
     else:
-        report = io.BytesIO(bytes(json.dumps(main()), encoding="utf-8"))
+        report = io.StringIO(json.dumps(main()))
 
         s3 = boto3.resource('s3')
-        s3.meta.client.upload_fileobj(report, os.getenv("export EXAMPLE_VARIABLE='example value'"),
-                                      f"{datetime.now()}-vulnerability-report")
+        s3.meta.client.put_object(Body=report.getvalue(), Bucket=os.getenv("S3_BUCKET_NAME"),
+                                  Key=f"{datetime.now()}-vulnerability-report")
+
+
